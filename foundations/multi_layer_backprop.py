@@ -25,26 +25,24 @@ class Solution:
          np.array(y_true, dtype=float))
         
         N = len(y_true)
-        z1 = np.dot(x, W1.T) + b1
+        z1 = x @ W1.T + b1
         a1 = np.maximum(0, z1)
-        z2 = np.dot(a1, W2.T) + b2
+        z2 = a1 @ W2.T + b2
         loss = np.mean((z2 - y_true)**2)
 
-        dz2 = 2/N * (z2 - y_true)
+        dz2 =  2/N * (z2 - y_true)
         da1 = dz2 @ W2
         dW2 = np.outer(dz2, a1)
         db2 = dz2
         relu_mask = z1 > 0
         dz1 = da1 * relu_mask
         dW1 = np.outer(dz1, x)
-        db1 = dz1 * np.ones_like(b1)
+        db1 = dz1
 
         return {
             'loss': round(loss, 4).tolist(),
-            'dW1': np.round(dW1, 4).tolist(),
-            'db1': np.round(db1, 4).tolist(),
-            'dW2': np.round(dW2, 4).tolist(),
-            'db2': np.round(db2, 4).tolist()
+            'dW1' : np.round(dW1, 4).tolist(),
+            'db1' : np.round(db1, 4).tolist(),
+            'dW2' : np.round(dW2, 4).tolist(),
+            'db2' : np.round(db2, 4).tolist()
         }
-        
-
