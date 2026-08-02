@@ -8,11 +8,11 @@ class Solution(nn.Module):
         torch.manual_seed(0)
         # Architecture: Linear(784, 512) -> ReLU -> Dropout(0.2) -> Linear(512, 10) -> Sigmoid
         self.model = nn.Sequential(
-            nn.Linear(in_features=784, out_features=512),  
-            nn.ReLU(),                                   
-            nn.Dropout(p=0.2),   
-            nn.Linear(in_features=512, out_features=10),
-            nn.Sigmoid()     
+            nn.Linear(784, 512),
+            nn.ReLU(),
+            nn.Dropout(p=0.2),
+            nn.Linear(512, 10),
+            nn.Sigmoid()
         )
 
     def forward(self, images: TensorType[float]) -> TensorType[float]:
